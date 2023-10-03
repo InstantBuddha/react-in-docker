@@ -1,5 +1,7 @@
 # react-in-docker
 
+## Initialize whole new project
+
 Just need to run
 
 ```bash
