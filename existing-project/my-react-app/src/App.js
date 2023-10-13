@@ -18,6 +18,7 @@ function App() {
         >
           Learn React
         </a>
+        <p>I have been changed!</p>
         <RandomComponent />
       </header>
     </div>

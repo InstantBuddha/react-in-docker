@@ -9,6 +9,3 @@ services:
       - "3000:3000"
     volumes:
       - ./my-react-app:/my-react-app
-
-volumes:
-  my-react-app-volume:

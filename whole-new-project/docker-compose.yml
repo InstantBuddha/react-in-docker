@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    volumes:  # note that this is different in the existing-project
+    volumes:  # note that this is different in the existing-project, as it is a bind mount
       - my-react-app-volume:/app
 
 volumes:
