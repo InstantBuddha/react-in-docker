@@ -26,7 +26,7 @@ docker run -it --rm -v $(pwd):/app -w /app node:14-alpine sh -c "npx create-reac
 From the same directory where the previous command was run, the following command can be run to start the development server (the directory name needs to be rewritten of course)
 
 ```bash
-docker run -it --rm -p 3000:3000 -v $(pwd):/react-in-docker -w /react-in-docker node:14-alpine sh -c "npm install && npm start"
+docker run -it --rm --name react-in-docker -p 3000:3000 -v $(pwd):/react-in-docker -w /react-in-docker node:14-alpine sh -c "npm install && npm start"
 ```
 ## Installing and running a React project using a docker-compose.yml + Dockerfile setup
 
