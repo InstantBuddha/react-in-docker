@@ -1,14 +1,9 @@
-version: '3'
 services:
   react-app:
     image: my-react-app
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: whole-new-project  
     ports:
       - "3000:3000"
-    volumes:  # note that this is different in the existing-project, as it is a bind mount
-      - my-react-app-volume:/app
-
-volumes:
-  my-react-app-volume:

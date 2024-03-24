@@ -18,7 +18,7 @@ In this case no docker-compose.yml or Dockerfile is necessary
 Run the following command to init the project in the present folder (with the folder name as project name)
 
 ```bash
-docker run -it --rm -v $(pwd):/app -w /app node:14-alpine sh -c "npx create-react-app ."
+docker run -it --rm -v $(pwd):/my-react-app -w /my-react-app node:21-alpine sh -c "npx create-react-app ./my-react-app"
 ```
 
 ### Run an existing project with a docker run command
@@ -26,7 +26,7 @@ docker run -it --rm -v $(pwd):/app -w /app node:14-alpine sh -c "npx create-reac
 From the same directory where the previous command was run, the following command can be run to start the development server (the directory name needs to be rewritten of course)
 
 ```bash
-docker run -it --rm --name react-in-docker -p 3000:3000 -v $(pwd):/react-in-docker -w /react-in-docker node:14-alpine sh -c "npm install && npm start"
+docker run -it --rm --name react-in-docker -p 3000:3000 -v $(pwd):/react-in-docker -w /react-in-docker node:21-alpine sh -c "npm install && npm start"
 ```
 ## Installing and running a React project using a docker-compose.yml + Dockerfile setup
 
@@ -40,18 +40,23 @@ Build the project:
 docker build -t my-react-app .
 ```
 
-And then (builds automatically):
+And then
 ```bash
 docker compose up
 ```
 
-The files in the volume can be edited and they are saved.
+The files in the container can be copied to your computer.
+
+To sh in:
+```sh
+docker exec -it whole-new-project sh
+```
 
 ### Add an existing project
 
 The project files need to be copied, here I have done it with the my-react-app dummy project.
 
-Then, everything is the same, I changed the settings of the bind mount, so it updates if the local files in the my-react-app folder are changed.
+Then, everything is the same, I added a bind mount, so it updates if the local files in the my-react-app folder are changed.
 
 ## Handle permission issues
 In case permission issues arise as the files were created by the container user and not your OS user, add permissions (replace dan with your username and change the directory path)
@@ -62,4 +67,10 @@ chmod -R g+rx ~/NEW_PROGRAMMING/react-in-docker
 chmod -R o+rx ~/NEW_PROGRAMMING/react-in-docker
 
 sudo chown -R dan:dan ~/NEW_PROGRAMMING/react-in-docker
+```
+
+or a simpler way for everything in the present directory:
+
+```sh
+sudo chmod -R 777 ./
 ```
