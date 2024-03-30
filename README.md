@@ -8,6 +8,7 @@
     - [Initialize whole new project with docker-compose.yml](#initialize-whole-new-project-with-docker-composeyml)
     - [Add an existing project](#add-an-existing-project)
   - [Handle permission issues](#handle-permission-issues)
+  - [Handling package updates](#handling-package-updates)
 
 ## Installing and running a React project using only docker run commands
 
@@ -73,4 +74,24 @@ or a simpler way for everything in the present directory:
 
 ```sh
 sudo chmod -R 777 ./
+```
+
+## Handling package updates
+
+With the npm-check-updates:
+
+```sh
+npx npm-check-updates
+```
+
+then update package.json
+
+```sh
+npx npm-check-updates -u
+```
+
+and then
+
+```sh
+npm install
 ```
