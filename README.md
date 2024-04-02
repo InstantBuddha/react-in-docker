@@ -9,6 +9,7 @@
     - [Add an existing project](#add-an-existing-project)
   - [Handle permission issues](#handle-permission-issues)
   - [Handling package updates](#handling-package-updates)
+  - [React in Docker in production](#react-in-docker-in-production)
 
 ## Installing and running a React project using only docker run commands
 
@@ -95,3 +96,17 @@ and then
 ```sh
 npm install
 ```
+
+## React in Docker in production
+
+Here, I added an nginx to serve the built React project. 
+
+To run the production docker compose, just run:
+
+```sh
+docker compose -f docker-compose-prod.yml up
+```
+
+The React container exits with code 0 after build and the nginx continues running to serve the built version.
+
+If you would like to run the project on your local computer, open the following in the browser: http://localhost:80
