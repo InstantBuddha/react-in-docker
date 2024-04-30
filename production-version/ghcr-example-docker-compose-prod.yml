@@ -1,0 +1,26 @@
+services:
+  react-frontend:
+    image: ghcr.io/instantbuddha/react-in-docker-production-version:latest
+    container_name: react-in-docker-production
+    ports:
+      - "3000:3000"
+    volumes:
+      - ridp-volume:/my-react-app
+    networks:
+      - react-frontend-network
+  nginx-web:
+    image: nginx:stable-alpine3.17
+    container_name: react-frontend-nginx-webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ridp-volume:/my-react-app
+      - ./nginx-config:/etc/nginx/conf.d
+    networks:
+      - react-frontend-network
+volumes:
+  ridp-volume:
+networks:
+  react-frontend-network:
+    driver: bridge

@@ -10,6 +10,8 @@
   - [Handle permission issues](#handle-permission-issues)
   - [Handling package updates](#handling-package-updates)
   - [React in Docker in production](#react-in-docker-in-production)
+  - [Applying changes to original files to be built !IMPORTANT!](#applying-changes-to-original-files-to-be-built-important)
+  - [Github Image Repository in docker-compose-prod.yml](#github-image-repository-in-docker-compose-prodyml)
 
 ## Installing and running a React project using only docker run commands
 
@@ -110,3 +112,27 @@ docker compose -f docker-compose-prod.yml up
 The React container exits with code 0 after build and the nginx continues running to serve the built version.
 
 If you would like to run the project on your local computer, open the following in the browser: http://localhost:80
+
+## Applying changes to original files to be built !IMPORTANT!
+
+If you have already built the production ready image, simply rebuilding the project might not be necessary. To make sure all the changes are added:
+
+  1. Remove the already built image
+  2. Remove the already created volume
+  3. Build the project with the following command to avoid problems created by caching:
+  ```bash
+  docker compose -f docker-compose-prod.yml build --no-cache
+  ```
+  4. Just in case clear the cache in your browser too
+
+## Github Image Repository in docker-compose-prod.yml
+
+Replaces the need of building the production image on a server (might be useful with low memory or disk space environments)
+
+After building the image and uploading it to ghcr.io, the following can be modifiedd in docker-compose-prod.yml:
+
+```yml
+react-frontend:
+    image: ghcr.io/instantbuddha/react-in-docker-production-version:latest
+    container_name: react-in-docker-production
+```    
